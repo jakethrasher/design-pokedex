@@ -8,7 +8,7 @@ export default class SearchPage extends Component {
     state={
         pokemon:pokeData,
         sortOrder:'',
-        sortBy:'',
+        sortByType:['grass','fire','water','bug','normal'],
         filter:'',
     }
     handleSortOrder= (e)=>{
