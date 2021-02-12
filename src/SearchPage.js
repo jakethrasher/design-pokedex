@@ -23,6 +23,12 @@ export default class SearchPage extends Component {
         }else if(this.state.sortOrder === 'descending'){
             this.state.pokemon.sort((a,b)=>b.pokemon.localeCompare(a.pokemon))
         }
+        
+        if(this.state.sortBy === 'shape'){
+            this.state.pokemon.sort((a,b)=>a[this.state.sortBy].localeCompare(b[this.state.sortBy]))
+        }
+     
+        
         return (
             <div>
                 Sort pokemon by name alphabetically ascending or descending
