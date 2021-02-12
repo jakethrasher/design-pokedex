@@ -26,6 +26,10 @@ export default class SearchPage extends Component {
         
         if(this.state.sortBy === 'shape'){
             this.state.pokemon.sort((a,b)=>a[this.state.sortBy].localeCompare(b[this.state.sortBy]))
+        }else if(this.state.sortBy === 'ability_1'){
+            this.state.pokemon.sort((a,b)=>a[this.state.sortBy].localeCompare(b[this.state.sortBy]))
+        }else if(this.state.sortBy === 'type_1'){
+            this.state.pokemon.sort((a,b)=>a[this.state.sortBy].localeCompare(b[this.state.sortBy]))
         }
      
         
@@ -34,7 +38,7 @@ export default class SearchPage extends Component {
                 Sort pokemon by name alphabetically ascending or descending
 
                <Sort handleSort={this.handleSortOrder} options={['ascending', 'descending']}/>
-
+               
                <Sort handleSort={this.handleChangeType} options={['pokemon','shape','ability_1','type_1']}/>
 
                <PokeList pokeArray={pokeData}/>
