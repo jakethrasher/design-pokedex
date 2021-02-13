@@ -20,9 +20,8 @@ export default class SearchPage extends Component {
     }
   
     handleSubmit=(e)=>{
-        e.preventDefault();
         this.setState({
-            filter: e.target[0].value
+            filter: e.target.value
         })
         console.log(this.state.filter)
         
