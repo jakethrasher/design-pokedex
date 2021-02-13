@@ -10,7 +10,7 @@ export default class SearchPage extends Component {
         pokemon:pokeData,
         sortOrder:'ascending',
         sortBy:'pokemon',
-        filter:'',
+        query:'',
     }
     handleSortOrder= (e)=>{
         this.setState({sortOrder: e.target.value})
@@ -19,12 +19,11 @@ export default class SearchPage extends Component {
         this.setState({sortBy: e.target.value})
     }
   
-    handleSubmit=(e)=>{
+    handleChangeQuery=(e)=>{
         this.setState({
-            filter: e.target.value
+            query: e.target.value
         })
-        console.log(this.state.filter)
-        
+        console.log(this.state.query)
     }
    
     render() {
@@ -33,13 +32,18 @@ export default class SearchPage extends Component {
         }else if(this.state.sortOrder === 'descending'){
             this.state.pokemon.sort((a,b)=>b[this.state.sortBy].localeCompare(a[this.state.sortBy]))
         }
+
+        const filteredData = this.state.pokemon.filter(item=>
+            item.pokemon.includes(this.state.query)
+
+        )
    
         return (
             <div className='pokedex'>
 
                 <div className='sidebar'>
-
-                    <SearchBar handleSubmit = {this.handleSubmit}/>
+                    <p>Search by name</p>
+                    <SearchBar handleChangeQuery = {this.handleChangeQuery}/>
 
                     <p>Sort by type!</p>
                     <Sort handleSort={this.handleChangeType} options={['pokemon','shape','ability_1','type_1']} />
@@ -49,7 +53,7 @@ export default class SearchPage extends Component {
 
                 </div>
                 <div className="image-container">
-                    <PokeList pokeArray={pokeData}/>
+                    <PokeList pokeArray={filteredData}/>
                 </div>
 
             </div>

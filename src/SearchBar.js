@@ -5,7 +5,7 @@ export default class SearchBar extends Component {
         return (
             <div>
                 <form >
-                    <input type="text" name="searchbar" onChange={this.props.handleSubmit}/>
+                    <input type="text" name="searchbar" onChange={this.props.handleChangeQuery}/>
                 </form>
             </div>
         )

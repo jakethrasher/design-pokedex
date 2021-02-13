@@ -5,7 +5,7 @@ export default class Header extends Component {
     render() {
         const headerContents={
             backgroundColor: '#fd0',
-            height: '90px',
+            height: '5em',
             display: 'flex',
             justifyContent:'center',
         }
