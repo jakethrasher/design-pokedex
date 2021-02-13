@@ -34,7 +34,7 @@ export default class SearchPage extends Component {
         }
 
         const filteredData = this.state.pokemon.filter(item=>
-            item.pokemon.includes(this.state.query)
+            item.pokemon.includes(this.state.query.toLowerCase())
 
         )
    
