@@ -7,8 +7,7 @@ export default class Header extends Component {
             backgroundColor: '#fd0',
             height: '90px',
             display: 'flex',
-            justifyContent:'center'
-
+            justifyContent:'center',
         }
         const linkContainer={
             display:'flex',
