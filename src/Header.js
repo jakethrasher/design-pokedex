@@ -4,17 +4,26 @@ import { Link } from 'react-router-dom'
 export default class Header extends Component {
     render() {
         const headerContents={
+            backgroundColor: '#fd0',
+            height: '90px',
+            display: 'flex',
+            justifyContent:'center'
+
+        }
+        const linkContainer={
             display:'flex',
-            justifyContent: 'center',
-            alignItems: 'baseline',
+            alignItems: 'center',
+            width: '12em',
+            justifyContent: 'space-between',
+            fontSize: '1.5rem',
+            fontDecoration: 'none'
         }
         return (
             <div>
                 <div style={headerContents}>
-                    <h1>Pokédex</h1>
-                    <div>
-                        <Link to='./'>Home Page</Link>
-                        <Link to="./search">Search Page</Link>
+                    <div style={linkContainer}>
+                        <Link to='./' style={{textDecoration: 'none'}}>Home</Link>
+                        <Link to="./search" style={{textDecoration: 'none'}}>Pokédex</Link>
                     </div>
                 </div>
             </div>

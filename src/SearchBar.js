@@ -4,9 +4,9 @@ export default class SearchBar extends Component {
     render() {
         return (
             <div>
-                <form>
-                    <input/>
-                    <input onSubmit={this.props.handle} type="submit"/>
+                <form onSubmit={this.props.handleSubmit}>
+                    <input type="text" name="searchbar" />
+                    <input type="submit"/>
                 </form>
             </div>
         )
