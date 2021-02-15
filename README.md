@@ -1,1 +1,1 @@
-![Miro Board]('./public/pokedex-miroboard.png')
+![Miro Board](src/pokedex-miroboard.png)
