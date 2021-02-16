@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import { NavLink, withRouter } from 'react-router-dom'
 
-export default class Header extends Component {
+export default withRouter (class Header extends Component {
     render() {
         const headerContents={
             backgroundColor: '#fd0',
             height: '5em',
             display: 'flex',
-            justifyContent:'center',
+            justifyContent: 'flex-end'
         }
         const linkContainer={
             display:'flex',
@@ -21,12 +21,15 @@ export default class Header extends Component {
             <div>
                 <div style={headerContents}>
                     <div style={linkContainer}>
-                        <Link to='./' style={{textDecoration: 'none'}}>Home</Link>
-                        <Link to="./search" style={{textDecoration: 'none'}}>Pokédex</Link>
+
+                        {this.props.location.pathname ==='/search' && <NavLink to='./' style={{textDecoration: 'none'}}>Home</NavLink>}
+
+                        {this.props.location.pathname ==='/' && <NavLink to="./search" style={{textDecoration: 'none'}}>Go To Pokédex</NavLink>}
+
                     </div>
                 </div>
             </div>
         )
     }
-}
+})
         
