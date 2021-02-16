@@ -49,7 +49,7 @@ export default class SearchPage extends Component {
                     <Sort handleSort={this.handleChangeType} options={['pokemon','shape','ability_1','type_1']} />
 
                     <p>Sort alphabetically!</p>
-                    <Sort handleSort={this.handleSortOrder} options={['ascending', 'descending']} />
+                    <Sort handleSort={this.handleSortOrder} options={['ascending', 'descending']} />y96 x 
 
                 </div>
                 <div className="image-container">
