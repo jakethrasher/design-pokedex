@@ -4,6 +4,7 @@ import PokeList from './PokeList.js'
 import Sort from './Sort.js'
 import SearchBar from './SearchBar.js'
 import request from 'superagent'
+import Spinner from 'Spinner.js'
 
 export default class SearchPage extends Component {
     state={
@@ -11,14 +12,19 @@ export default class SearchPage extends Component {
         sortOrder:'ascending',
         sortBy:'pokemon',
         query:'',
+        loading:'false',
     }
-  
+    
     componentDidMount = async () =>{
 
+        await this.setState({
+            loading:'true'
+        })
         const data = await request.get('https://pokedex-alchemy.herokuapp.com/api/pokedex')
         
         this.setState({
-            pokemon: data.body.results
+            pokemon: data.body.results,
+            loading: 'false'
         })
         console.log(this.state.pokemon)
     }     
@@ -56,7 +62,7 @@ export default class SearchPage extends Component {
 
                 <div className='sidebar'>
                     <p>Search by name</p>
-                    <SearchBar handleChangeQuery = {this.handleChangeQuery}/>
+                    <SearchBar handleChangeQuery = {this.handleChangeQuery} value={this.state.query}/>
 
                     <p>Sort by type!</p>
                     <Sort handleSort={this.handleChangeType} options={['pokemon','shape','ability_1','type_1']} />
@@ -66,6 +72,7 @@ export default class SearchPage extends Component {
 
                 </div>
                 <div className="image-container">
+                    {!this.state.loading && <Spinner/>}
                     <PokeList pokeArray={filteredData}/>
                 </div>
 
