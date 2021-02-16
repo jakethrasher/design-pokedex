@@ -1,29 +1,42 @@
 import React, { Component } from 'react'
-import pokeData from './data.js'
 import './App.css'
 import PokeList from './PokeList.js'
 import Sort from './Sort.js'
 import SearchBar from './SearchBar.js'
+import request from 'superagent'
 
 export default class SearchPage extends Component {
     state={
-        pokemon:pokeData,
+        pokemon:[],
         sortOrder:'ascending',
         sortBy:'pokemon',
         query:'',
     }
+  
+    componentDidMount = async () =>{
+
+        const data = await request.get('https://pokedex-alchemy.herokuapp.com/api/pokedex')
+        
+        this.setState({
+            pokemon: data.body.results
+        })
+        console.log(this.state.pokemon)
+    }     
+        
+
+
     handleSortOrder= (e)=>{
         this.setState({sortOrder: e.target.value})
     }
     handleChangeType=(e)=>{
-        this.setState({sortBy: e.target.value})
+        this.setState({
+            sortBy: e.target.value})
     }
   
     handleChangeQuery=(e)=>{
         this.setState({
             query: e.target.value
         })
-        console.log(this.state.query)
     }
    
     render() {
