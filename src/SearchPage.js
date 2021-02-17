@@ -9,21 +9,25 @@ import Spinner from './Spinner'
 export default class SearchPage extends Component {
     state={
         pokemon:[],
-        sortOrder:'ascending',
-        sortBy:'pokemon',
+        sortOrder:'',
+        sortBy:'',
         query:'',
         loading:false,
+        currentPage:1,
+        totalPokemon:'',
     }
     fetchPokemon = async ()=>{
 
         await this.setState({
             loading:true,
         })
-        const data = await request.get(`https://pokedex-alchemy.herokuapp.com/api/pokedex?pokemon=${this.state.query}&sort=${this.state.sortBy}&direction=${this.state.sortOrder}`)
+        const data = await request.get(`https://pokedex-alchemy.herokuapp.com/api/pokedex?pokemon=${this.state.query}&sort=${this.state.sortBy}&direction=${this.state.sortOrder}&page=${this.state.currentPage}&perPage=30
+        `)
         
         await this.setState({
             pokemon: data.body.results,
             loading: false,
+            totalPokemon:data.body.count,
         })
     }
 
@@ -37,13 +41,13 @@ export default class SearchPage extends Component {
 
     handleSortOrder= async (e)=>{
         this.setState({sortOrder: e.target.value})
-        this.fetchPokemon()
+        await this.fetchPokemon()
     }
 
     handleChangeType=async(e)=>{
-        this.setState({
+        await this.setState({
             sortBy: e.target.value})
-            this.fetchPokemon()
+          await this.fetchPokemon()
     }
 
     handleChangeQuery=(e)=>{
@@ -51,8 +55,21 @@ export default class SearchPage extends Component {
             query: e.target.value
         })
     }
-
-render() {
+    // event handlers for next page and previous page buttons
+    handleNextClick=async()=>{
+        await this.setState({
+            currentPage: this.state.currentPage + 1,
+        })
+        await this.fetchPokemon()
+    }
+    handlePreviousClick=async()=>{
+        await this.setState({
+            currentPage: this.state.currentPage - 1,
+        })
+        await this.fetchPokemon()
+    }
+    render() {
+    console.log(this.state.currentPage)
 
       return (
         <div className='pokedex'>
@@ -67,8 +84,6 @@ render() {
 
                 <Sort handleSort={this.handleChangeType} options={['pokemon','shape','ability_1','type_1']} value={this.state.sortBy} />
 
-                {console.log(this.state.sortBy)}
-
                 <p>Sort Alphabetically</p>
                 <Sort handleSort={this.handleSortOrder} options={['ascending', 'descending']} value={this.state.sortOrder}/>
 
@@ -76,6 +91,10 @@ render() {
 
             <div className="image-container">
 
+                <button className="page-button" onClick={this.handlePreviousClick} disabled={this.state.currentPage===1}>&#9756;</button>
+
+                <button className="page-button" onClick={this.handleNextClick}>&#9758;</button>
+                
                 {this.state.loading ? <Spinner/> :
 
                 <PokeList pokeArray={this.state.pokemon}/>}
