@@ -46,10 +46,12 @@ ul{
   flex-wrap:wrap;
   align-items: center;
   justify-content: center;
+  margin:0 auto;
+  padding:2px;
   
 }
 .poke-images{
-  height: 13em;
+  height: 10em;
 }
 p{
   margin: 0;
@@ -66,4 +68,11 @@ p{
  height: 100vh;
  background-color: #cef;
  overflow: scroll;
+}
+.page-button{
+  font-size: 3em;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  outline: none;
 }

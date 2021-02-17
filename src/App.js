@@ -7,6 +7,7 @@ import SearchPage from './SearchPage.js'
 import './App.css';
 import Header from './Header.js'
 import HomePage from './HomePage'
+import DetailPage from './DetailPage.js';
 
 function App() {
   return (
@@ -23,6 +24,11 @@ function App() {
                             path="/search" 
                             exact
                             render={(routerProps) => <SearchPage {...routerProps} />} 
+                        />
+                        <Route 
+                            path="/search/:pokemonName"
+                            exact
+                            render={(routerProps) => <DetailPage {...routerProps} />} 
                         />
                     </Switch>
                 </Router>
