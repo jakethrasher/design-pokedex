@@ -14,6 +14,7 @@ export default class SearchPage extends Component {
         query:'',
         loading:false,
         currentPage:1,
+        totalPokemon:'',
     }
     fetchPokemon = async ()=>{
 
@@ -26,6 +27,7 @@ export default class SearchPage extends Component {
         await this.setState({
             pokemon: data.body.results,
             loading: false,
+            totalPokemon:data.body.count,
         })
     }
 
