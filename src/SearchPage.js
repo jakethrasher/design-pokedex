@@ -6,7 +6,6 @@ import SearchBar from './SearchBar.js'
 import request from 'superagent'
 import Spinner from './Spinner'
 
-
 export default class SearchPage extends Component {
     state={
         pokemon:[],
@@ -20,13 +19,14 @@ export default class SearchPage extends Component {
         await this.setState({
             loading:true,
         })
-        const data = await request.get(`https://pokedex-alchemy.herokuapp.com/api/pokedex?pokemon=${this.state.query}&sort=pokemon&direction=${this.state.sortOrder}`)
+        const data = await request.get(`https://pokedex-alchemy.herokuapp.com/api/pokedex?pokemon=${this.state.query}&sort=${this.state.sortBy}&direction=${this.state.sortOrder}`)
         
         await this.setState({
             pokemon: data.body.results,
             loading: false,
         })
     }
+
     componentDidMount = async () =>{
         await this.fetchPokemon()
     }     
@@ -35,14 +35,15 @@ export default class SearchPage extends Component {
         await this.fetchPokemon()
 }   
 
-
-    handleSortOrder= (e)=>{
+    handleSortOrder= async (e)=>{
         this.setState({sortOrder: e.target.value})
+        this.fetchPokemon()
     }
 
-    handleChangeType=(e)=>{
+    handleChangeType=async(e)=>{
         this.setState({
             sortBy: e.target.value})
+            this.fetchPokemon()
     }
 
     handleChangeQuery=(e)=>{
@@ -50,51 +51,40 @@ export default class SearchPage extends Component {
             query: e.target.value
         })
     }
-        
-  
-   
-    render() {
-        // if(this.state.sortOrder === 'ascending'){
-        //     this.state.pokemon.sort((a,b)=>a[this.state.sortBy].localeCompare(b[this.state.sortBy]))
-        // }else if(this.state.sortOrder === 'descending'){
-        //     this.state.pokemon.sort((a,b)=>b[this.state.sortBy].localeCompare(a[this.state.sortBy]))
-        // }
 
-        // const filteredData = this.state.pokemon.filter(item=>
-        //     item.pokemon.includes(this.state.query.toLowerCase())
+render() {
 
-        // )
-   
-        return (
-            <div className='pokedex'>
+      return (
+        <div className='pokedex'>
 
-                <div className='sidebar'>
+            <div className='sidebar'>
 
-                    <p>Search by name</p>
-                    
-                    <SearchBar handleChangeQuery = {this.handleChangeQuery} value={this.state.query}/>
+                <p>Search By Name</p>
+                
+                <SearchBar handleChangeQuery = {this.handleChangeQuery} value={this.state.query} handleClick={this.handleClick}/>
 
-                    <button onClick={this.handleClick}>search</button>
+                <p>Sort By Category</p>
 
-                    <p>Sort by type!</p>
+                <Sort handleSort={this.handleChangeType} options={['pokemon','shape','ability_1','type_1']} value={this.state.sortBy} />
 
-                    <Sort handleSort={this.handleChangeType} options={['pokemon','shape','ability_1','type_1']} />
+                {console.log(this.state.sortBy)}
 
-                    <p>Sort alphabetically!</p>
-                    <Sort handleSort={this.handleSortOrder} options={['ascending', 'descending']} />
-
-                </div>
-
-                <div className="image-container">
-
-                    {this.state.loading ? <Spinner/> :
-
-                    <PokeList pokeArray={this.state.pokemon}/>}
-
-                </div>
+                <p>Sort Alphabetically</p>
+                <Sort handleSort={this.handleSortOrder} options={['ascending', 'descending']} value={this.state.sortOrder}/>
 
             </div>
-        )
-    }
+
+            <div className="image-container">
+
+                {this.state.loading ? <Spinner/> :
+
+                <PokeList pokeArray={this.state.pokemon}/>}
+
+            </div>
+
+        </div>
+    )
 }
-                    
+}
+        
+                
