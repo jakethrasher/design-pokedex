@@ -15,13 +15,14 @@ export default class SearchPage extends Component {
         loading:false,
         currentPage:1,
         totalPokemon:'',
+        pokePerPage:20,
     }
     fetchPokemon = async ()=>{
 
         await this.setState({
             loading:true,
         })
-        const data = await request.get(`https://pokedex-alchemy.herokuapp.com/api/pokedex?pokemon=${this.state.query}&sort=${this.state.sortBy}&direction=${this.state.sortOrder}&page=${this.state.currentPage}&perPage=30
+        const data = await request.get(`https://pokedex-alchemy.herokuapp.com/api/pokedex?pokemon=${this.state.query}&sort=${this.state.sortBy}&direction=${this.state.sortOrder}&page=${this.state.currentPage}&perPage=${this.state.pokePerPage}
         `)
         
         await this.setState({
@@ -69,8 +70,8 @@ export default class SearchPage extends Component {
         await this.fetchPokemon()
     }
     render() {
-    console.log(this.state.currentPage)
-
+    const totalPages =Math.ceil(this.state.totalPokemon / this.state.pokePerPage)
+    
       return (
         <div className='pokedex'>
 
@@ -90,14 +91,15 @@ export default class SearchPage extends Component {
             </div>
 
             <div className="image-container">
-
-                <button className="page-button" onClick={this.handlePreviousClick} disabled={this.state.currentPage===1}>&#9756;</button>
-
-                <button className="page-button" onClick={this.handleNextClick}>&#9758;</button>
+                <div className="button-container">
+                    <button className="page-button" onClick={this.handlePreviousClick} disabled={this.state.currentPage===1}>&#9756;</button>
+                    <span>Page: {this.state.currentPage}</span>
+                    <button className="page-button" onClick={this.handleNextClick} disabled={this.state.currentPage === totalPages}>&#9758;</button>
+                </div>
                 
                 {this.state.loading ? <Spinner/> :
-
                 <PokeList pokeArray={this.state.pokemon}/>}
+
 
             </div>
 
@@ -105,5 +107,6 @@ export default class SearchPage extends Component {
     )
 }
 }
+                
         
                 

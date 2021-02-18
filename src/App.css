@@ -76,3 +76,8 @@ p{
   border: none;
   outline: none;
 }
+.button-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
