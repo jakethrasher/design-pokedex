@@ -7,29 +7,21 @@ export default withRouter (class Header extends Component {
             backgroundColor: '#fd0',
             height: '5em',
             display: 'flex',
-            justifyContent: 'flex-end'
-        }
-        const linkContainer={
-            display:'flex',
-            alignItems: 'center',
-            width: '12em',
-            justifyContent: 'space-between',
+            alignItems:'center',
+            justifyContent: 'space-evenly',
             fontSize: '1.5rem',
-            fontDecoration: 'none'
         }
         return (
-            <div>
+            
                 <div style={headerContents}>
-                    <div style={linkContainer}>
+                    
+                        {this.props.location.pathname !=='/' && <NavLink to='/' style={{textDecoration: 'none'}}>Home</NavLink>}
 
-                        {this.props.location.pathname ==='/search' && <NavLink to='./' style={{textDecoration: 'none'}}>Home</NavLink>}
+                        {this.props.location.pathname !=='/search' && <NavLink to="/search" style={{textDecoration: 'none'}}>Go To Pokédex</NavLink>}
 
-                        {this.props.location.pathname ==='/' && <NavLink to="./search" style={{textDecoration: 'none'}}>Go To Pokédex</NavLink>}
-
-                    </div>
                 </div>
-            </div>
+            
         )
     }
 })
-        
+                                                 

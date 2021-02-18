@@ -5,7 +5,7 @@ export default class Spinner extends Component {
       
         return (
             <div>
-                <img src='./new-spinner.gif' alt="loading"/>
+                <img src='https://cdn.dribbble.com/users/51771/screenshots/3650224/netneutrality-fidget-spinner-animated.gif' alt="loading"/>
             </div>
         )
     }
