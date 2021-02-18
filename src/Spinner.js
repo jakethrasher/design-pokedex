@@ -2,9 +2,10 @@ import React, { Component } from 'react'
 
 export default class Spinner extends Component {
     render() {
+      
         return (
             <div>
-                <img src='./spinner.gif' alt="loading"/>
+                <img src='./new-spinner.gif' alt="loading"/>
             </div>
         )
     }
