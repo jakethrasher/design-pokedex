@@ -5,7 +5,7 @@ export default withRouter (class Header extends Component {
     render() {
         const headerContents={
             backgroundColor: '#fd0',
-            height: '5em',
+            height: '4em',
             display: 'flex',
             alignItems:'center',
             justifyContent: 'space-evenly',
