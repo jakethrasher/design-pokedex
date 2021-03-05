@@ -17,6 +17,7 @@ export default class SearchPage extends Component {
         totalPokemon:'',
         pokePerPage:20,
     }
+
     fetchPokemon = async ()=>{
 
         await this.setState({
@@ -31,7 +32,7 @@ export default class SearchPage extends Component {
             totalPokemon:data.body.count,
         })
     }
-
+    
     componentDidMount = async () =>{
         await this.fetchPokemon()
     }     

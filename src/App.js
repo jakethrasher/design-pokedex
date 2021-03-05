@@ -8,7 +8,6 @@ import './App.css';
 import Header from './Header.js'
 import HomePage from './HomePage'
 import DetailPage from './DetailPage.js';
-
 function App() {
   return (
     <div className="App">
